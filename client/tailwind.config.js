@@ -1,5 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+/* eslint-disable no-undef */
+const withMT = require("@material-tailwind/react/utils/withMT");
+ 
+module.exports = withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -9,7 +11,10 @@ export default {
         English: "Poppins",
         Header: "Barlow",
       },
+      colors : {
+        background : "#fbefdc"
+      }
     },
   },
   plugins: [],
-};
+});

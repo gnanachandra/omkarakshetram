@@ -1,5 +1,16 @@
-const App = () => {
-  return <div className="text-orange-500">App</div>;
-};
 
-export default App;
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
+import Home from './pages/Home'
+import LoginPage from './pages/LoginPage'
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path="/login" element={<LoginPage/>}/>
+      </Routes>
+    </Router>
+  )
+}
+
+export default App
