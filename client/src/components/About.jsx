@@ -1,10 +1,12 @@
+import { Card } from "@material-tailwind/react";
+
 // eslint-disable-next-line react/prop-types
 const About = () => {
   return (
     <div id="about">
       <div className="grid grid-cols-1 lg:grid-cols-2  md:px-10 gap-6 justify-center">
         {/* Left side content */}
-        <div className="flex items-center justify-center p-4 md:p-8 shadow-2xl rounded-3xl bg-white mx-4 md:mx-0 ">
+        <Card className="flex items-center justify-center p-4 md:p-8 bg-white mx-4 md:mx-0 text-black shadow-none">
           <div>
             <h2 className="font-Telugu text-center font-semibold text-2xl lg:text-3xl text-heading">
               ఆలయం గురించి
@@ -23,7 +25,7 @@ const About = () => {
               పాతాల కాళి అమ్మవారి మందిరం, కోటి లింగాలు నిర్మాణం జరుగుతూ ఉంది .
             </p>
           </div>
-        </div>
+        </Card>
         {/* Right side photo */}
         <div className="p-4 md:p-8 flex items-center">
           <img

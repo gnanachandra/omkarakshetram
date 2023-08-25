@@ -18,17 +18,17 @@ const Temples = () => {
     setTempleId(id);
   };
   return (
-    <div id="temples">
+    <div id="temples" className="py-6 lg:py-12">
       <h2 className="font-Telugu text-center font-semibold text-2xl lg:text-3xl text-heading">
         మరిన్ని దేవాలయాలు
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 md:px-10 mt-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 md:px-10 ">
         {data.map((temple, index) => {
           return (
             <Card className="" key={index}>
-              <CardHeader shadow={false} floated={false}>
+              <CardHeader shadow={false} floated={false} className="lg:h-80">
                 <img
-                  src="./herosection/mobile/hero-1.webp"
+                  src="https://picsum.photos/400"
                   alt="TempleImage"
                   className="h-full w-full object-cover"
                 />

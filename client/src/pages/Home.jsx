@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="bg-background flex flex-col gap-10">
+      <div className="bg-background flex flex-col gap-14">
         <Hero />
         <About/>
         <Temples/>
