@@ -8,7 +8,7 @@ export const login = asyncHandler(async(req,res)=>{
     if(!email || !password){
         throw new Error("Enter all details",StatusCodes.BAD_REQUEST);
     }
-    const user = await User.findOne({email,isActive : true});
+    const user = await User.findOne({email});
     if(!user)
     {
         throw new Error("User Not found",StatusCodes.NOT_FOUND);
@@ -18,8 +18,8 @@ export const login = asyncHandler(async(req,res)=>{
     {
         throw new Error("Invalid credentials",StatusCodes.UNAUTHORIZED);
     }
-    const accessToken = await user.createAccessToken();
-    return res.status(StatusCodes.OK).json({ message : "Login successful", accessToken : accessToken , user , role : user.role })
+    const accessToken = await user.generateAccessToken();
+    return res.status(StatusCodes.OK).json({ message : "Login successful", accessToken : accessToken , user  })
 })
 
 export const registeration = asyncHandler(async(req,res)=>{
