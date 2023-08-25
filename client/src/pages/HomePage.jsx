@@ -11,14 +11,15 @@ const HomePage = () => {
     navigate("/login", { replace: true });
   };
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen w-screen flex-wrap">
       <Card className="text-black p-5">
         <h2 className="font-bold text-lg text-center mb-5">
           You are Logged In
         </h2>
         {Object.keys(user).map((key, index) => {
           return (
-            <p key={index} className="text-gray-800 font-semibold">
+            key != "password" && 
+            <p key={index} className="text-gray-800 font-semibold flex-wrap">
               {key} : {user[key]}
             </p>
           );
