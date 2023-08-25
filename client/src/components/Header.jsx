@@ -1,5 +1,11 @@
 import React from "react";
-import { Navbar, Collapse, Button, IconButton } from "@material-tailwind/react";
+import {
+  Navbar,
+  Collapse,
+  Button,
+  IconButton,
+  Typography,
+} from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 export default function Header() {
@@ -42,7 +48,7 @@ export default function Header() {
             to={item.to}
             spy={true}
             smooth={true}
-            offset={10}
+            offset={-20}
             duration={500}
             className="cursor-pointer font-bold"
           >
@@ -53,15 +59,40 @@ export default function Header() {
     </ul>
   );
 
+  const mobileNavList = (
+    <ul className="mb-2 mt-2 flex flex-col gap-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      {menuItems.map((item, index) => {
+        return (
+          <ScrollLink
+            key={index}
+            activeClass="active"
+            to={item.to}
+            spy={true}
+            smooth={true}
+            offset={-300}
+            duration={500}
+            className="cursor-pointer font-bold"
+            onClick={() => setOpenNav(!openNav)}
+          >
+            {item.name}
+          </ScrollLink>
+        );
+      })}
+    </ul>
+  );
+
   return (
     <div className="w-full bg-[#FF8C00]">
-      <Navbar className="py-3 mx-auto w-screen  lg:py-4 shadow-none  rounded-none border-none bg-[#FF8C00]">
+      <Navbar className="mx-auto w-screen shadow-none  rounded-none border-none bg-[#FF8C00]">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Link to={"/"} className="font-Telugu text-2xl font-semibold">
+          <Typography
+            as="a"
+            href="#"
+            className="mr-4 cursor-pointer py-1.5 font-bold text-lg"
+          >
             ఓంకార క్షేత్రం
-          </Link>
-
-          <div className="flex items-center justify-center gap-4">
+          </Typography>
+          <div className="flex items-center gap-4">
             <div className="hidden lg:block">{navList}</div>
             <Link to={"/login"} className="hidden lg:block">
               <Button className="bg-deep-orange-600 shadow-none hover:shadow-none">
@@ -108,8 +139,8 @@ export default function Header() {
           </div>
         </div>
         <Collapse open={openNav}>
-          {navList}
-          <Link to={"/login"} className="">
+          {mobileNavList}
+          <Link to={"/login"} className="lg:block">
             <Button className="bg-deep-orange-600 shadow-none hover:shadow-none">
               Login
             </Button>

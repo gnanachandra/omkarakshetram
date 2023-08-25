@@ -13,6 +13,9 @@ module.exports = withMT({
       },
       colors : {
         background : "#fbefdc"
+      },
+      backgroundImage : {
+        'aboutImage' : "url('/herosection/aboutImage.jpg')"
       }
     },
   },

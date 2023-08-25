@@ -1,15 +1,15 @@
 // eslint-disable-next-line react/prop-types
 const About = () => {
   return (
-    <div id="about" className="pt-5 lg:pt-10">
+    <div id="about">
       <div className="grid grid-cols-1 lg:grid-cols-2  md:px-10 gap-6 justify-center">
         {/* Left side content */}
         <div className="flex items-center justify-center p-4 md:p-8 shadow-2xl rounded-3xl bg-white mx-4 md:mx-0 ">
           <div>
-            <h2 className="font-English text-center font-semibold text-2xl lg:text-3xl ">
-              About Temple
+            <h2 className="font-Telugu text-center font-semibold text-2xl lg:text-3xl text-heading">
+              ఆలయం గురించి
             </h2>
-            <p className="font-Telugu leading-8 lg:leading-loose font-medium text-lg mt-4 ">
+            <p className="font-Telugu leading-8 lg:leading-loose font-medium text-lg mt-1">
               షుమారు మూడు దశాబ్దాలుగా నిస్వార్థంగా సేవలందిస్తున్న అమ్మ ఛారిటబుల్
               ట్రస్ట్, గుంటూరు బాబా గారి ఆశీస్సులతో వారి సేవకులు కొంతమంది కలిసి
               గుంటూరు జిల్లా, ఫిరంగిపురం మండలం, వేమవరం గ్రామంలో కోటి లింగాల
@@ -27,12 +27,12 @@ const About = () => {
         {/* Right side photo */}
         <div className="p-4 md:p-8 flex items-center">
           <img
-            src="https://storage.googleapis.com/file-transfer-application/hero-3.jpg"
+            src="/aboutsection/aboutLaptop.jpg"
             alt="about image"
             className="hidden md:block rounded-md"
           />
           <img
-            src="https://storage.googleapis.com/file-transfer-application/hero-3.jpg"
+            src="/aboutsection/aboutMobile.jpg"
             alt="about image mobile"
             className="block md:hidden scale-95"
           />

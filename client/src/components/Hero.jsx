@@ -7,9 +7,16 @@ const images = [
   "/herosection/hero-4.jpg",
 ];
 
+const mobileImages = [
+  "/herosection/mobile/hero-1.webp",
+  "/herosection/mobile/hero-2.webp",
+  "/herosection/mobile/hero-3.webp",
+  "/herosection/mobile/hero-4.webp",
+];
+
 const Hero = () => {
   return (
-    <div className="mx-auto max-w-7xl pt-5">
+    <div className="mx-auto max-w-7xl pt-5" >
       <div className="hidden md:block cursor-pointer mx-10">
         <Splide
           options={{
@@ -25,7 +32,11 @@ const Hero = () => {
           {images.map((image, index) => {
             return (
               <SplideSlide key={index}>
-                <img className="h-full w-full object-cover" src={image} alt="Banner" />
+                <img
+                  className="h-full w-full object-cover"
+                  src={image}
+                  alt="Banner"
+                />
               </SplideSlide>
             );
           })}
@@ -37,17 +48,20 @@ const Hero = () => {
             rewind: true,
             speed: "1000",
             arrows: false,
-            
             interval: 3000,
             autoplay: true,
           }}
           aria-label="React Splide"
           data-splide-interval="1000"
         >
-          {images.map((image, index) => {
+          {mobileImages.map((image, index) => {
             return (
               <SplideSlide key={index}>
-                <img src={image} alt="Banner" className="h-full w-full object-cover" />
+                <img
+                  src={image}
+                  alt="Banner"
+                  className="h-full w-full object-cover"
+                />
               </SplideSlide>
             );
           })}
