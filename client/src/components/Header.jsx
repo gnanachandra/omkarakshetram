@@ -85,13 +85,16 @@ export default function Header() {
     <div className="w-full bg-[#FF8C00]">
       <Navbar className="mx-auto w-screen shadow-none  rounded-none border-none bg-[#FF8C00]">
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Typography
-            as="a"
-            href="#"
-            className="mr-4 cursor-pointer py-1.5 font-bold text-lg"
-          >
-            ఓంకార క్షేత్రం
-          </Typography>
+          <div className="flex items-center justify-center gap-4">
+            <img src="/logo.png" alt="Templelogo" className="h-12 w-16" />
+            <Typography
+              as="a"
+              href="#"
+              className="mr-4 cursor-pointer py-1.5 font-bold text-lg"
+            >
+              ఓంకార క్షేత్రం
+            </Typography>
+          </div>
           <div className="flex items-center gap-4">
             <div className="hidden lg:block">{navList}</div>
             <Link to={"/login"} className="hidden lg:block">

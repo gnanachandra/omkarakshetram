@@ -6,47 +6,17 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
-
-const data = [
-  {
-    name: "Temple-1",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur porro dolores blanditiis provident possimus sunt, nobis quisquam, odio inventore perferendis, adipisci soluta laboriosam tempora nostrum distinctio deleniti sequi minima cumque?",
-    image: "/temples/temple-1.jpg",
-  },
-  {
-    name: "Temple-2",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur porro dolores blanditiis provident possimus sunt, nobis quisquam, odio inventore perferendis, adipisci soluta laboriosam tempora nostrum distinctio deleniti sequi minima cumque?",
-    image: "/temples/temple-2.jpg",
-  },
-  {
-    name: "Temple-3",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur porro dolores blanditiis provident possimus sunt, nobis quisquam, odio inventore perferendis, adipisci soluta laboriosam tempora nostrum distinctio deleniti sequi minima cumque?",
-    image: "/temples/temple-3.jpg",
-  },
-  {
-    name: "Temple-4",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur porro dolores blanditiis provident possimus sunt, nobis quisquam, odio inventore perferendis, adipisci soluta laboriosam tempora nostrum distinctio deleniti sequi minima cumque?",
-    image: "/temples/temple-4.jpg",
-  },
-  {
-    name: "Temple-5",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur porro dolores blanditiis provident possimus sunt, nobis quisquam, odio inventore perferendis, adipisci soluta laboriosam tempora nostrum distinctio deleniti sequi minima cumque?",
-    image: "/temples/temple-5.jpg",
-  },
-  {
-    name: "Temple-6",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur porro dolores blanditiis provident possimus sunt, nobis quisquam, odio inventore perferendis, adipisci soluta laboriosam tempora nostrum distinctio deleniti sequi minima cumque?",
-    image: "/temples/temple-6.jpg",
-  },
-];
+import { useState } from "react";
+import data from "../data/templesData";
+import Temple from "./Temple";
 
 const Temples = () => {
+  const [open, setOpen] = useState(false);
+  const [templeId, setTempleId] = useState(1);
+  const handleOpen = (id) => {
+    setOpen(!open);
+    setTempleId(id);
+  };
   return (
     <div id="temples">
       <h2 className="font-Telugu text-center font-semibold text-2xl lg:text-3xl text-heading">
@@ -73,7 +43,7 @@ const Temples = () => {
                   variant="small"
                   className="font-normal text-gray-800"
                 >
-                  {temple.description}
+                  {temple.description.split(" ").slice(0, 25).join(" ")}
                 </Typography>
               </CardBody>
               <CardFooter className="pt-0">
@@ -81,6 +51,7 @@ const Temples = () => {
                   ripple={false}
                   fullWidth={true}
                   className="bg-deep-orange-500 w-fit hover:bg-deep-orange-600 shadow-none  hover:shadow-none focus:shadow-none active:scale-100"
+                  onClick={() => handleOpen(index)}
                 >
                   More Details
                 </Button>
@@ -89,6 +60,7 @@ const Temples = () => {
           );
         })}
       </div>
+      <Temple open={open} handleOpen={handleOpen} templeId={templeId} />
     </div>
   );
 };
