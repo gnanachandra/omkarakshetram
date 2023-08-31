@@ -28,7 +28,7 @@ const Temples = () => {
             <Card className="" key={index}>
               <CardHeader shadow={false} floated={false} className="lg:h-80">
                 <img
-                  src="https://picsum.photos/400"
+                  src= {temple.image}
                   alt="TempleImage"
                   className="h-full w-full object-cover"
                 />

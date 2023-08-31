@@ -34,7 +34,7 @@ const Temple = ({ open, handleOpen, templeId }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {/* image div */}
           <div className="flex items-center justify-center">
-            <img src="/itemple.jpg" alt="" />
+            <img src={data[templeId].image} alt="" />
           </div>
           {/* content */}
           <div className="p-4 font-medium">{data[templeId].description}</div>
