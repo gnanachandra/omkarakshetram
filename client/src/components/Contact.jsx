@@ -29,9 +29,8 @@ const Contact = () => {
                 <h4 className="mb-1 text-xl font-bold text-dark">Address</h4>
 
                 <p className="text-base text-body-color font-Telugu">
-                  కోటి లింగాల శ్రీ మహాకాళీ సహిత శ్రీ మహా కాళేశ్వర స్వామి
-                  క్షేత్రం, వేమవరం , ఫిరంగిపురం మండలం , గుంటూరు జిల్లా , ఆంధ్ర
-                  ప్రదేశ్ , భారతదేశం - 522529.
+                  Omkara Kshetram 2nd Ln, 2/13, Brodipet, Guntur, Andhra Pradesh
+                  522002
                 </p>
               </div>
             </div>
@@ -53,18 +52,12 @@ const Contact = () => {
                   Phone Number
                 </h4>
                 <p className="hidden md:block text-base text-body-color cursor-default">
-                  +91 9949888171, +91 9441545885, +91 9885185082
+                  Kishore (Bujji) - 9849599324
                 </p>
                 <div className="block md:hidden">
                   <div className="flex flex-col gap-1">
                     <a href="tel:+919949888171" className="text-lg">
-                      +91 9949888171
-                    </a>
-                    <a href="tel:+919441545885" className="text-lg">
-                      +91 9441545885
-                    </a>
-                    <a href="tel:+919885185082" className="text-lg">
-                      +91 9885185082
+                      Kishore (Bujji) - 9849599324
                     </a>
                   </div>
                 </div>

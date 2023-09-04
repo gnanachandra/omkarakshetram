@@ -25,7 +25,7 @@ const Temples = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 md:px-10 ">
         {data.map((temple, index) => {
           return (
-            <Card className="" key={index}>
+            <Card className="flex border justify-between" key={index}>
               <CardHeader shadow={false} floated={false} className="lg:h-80">
                 <img
                   src= {temple.image}
@@ -35,22 +35,22 @@ const Temples = () => {
               </CardHeader>
               <CardBody>
                 <div className="mb-2 flex items-center justify-between">
-                  <Typography className="font-bold text-black">
+                  <Typography className="font-bold font-Telugu  tracking-wide text-black">
                     {temple.name}
                   </Typography>
                 </div>
                 <Typography
                   variant="small"
-                  className="font-normal text-gray-800"
+                  className="font-normal font-Telugu   text-gray-800"
                 >
                   {temple.description.split(" ").slice(0, 25).join(" ")}
                 </Typography>
               </CardBody>
-              <CardFooter className="pt-0">
+              <CardFooter className="pt-0 flex items-end">
                 <Button
                   ripple={false}
                   fullWidth={true}
-                  className="bg-deep-orange-500 w-fit hover:bg-deep-orange-600 shadow-none  hover:shadow-none focus:shadow-none active:scale-100"
+                  className="bg-deep-orange-500 w-fit hover:bg-deep-orange-600 place-items-end shadow-none  hover:shadow-none focus:shadow-none active:scale-100"
                   onClick={() => handleOpen(index)}
                 >
                   More Details

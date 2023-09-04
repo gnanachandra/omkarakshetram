@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
 import {
-  Button,
   Dialog,
   DialogHeader,
   DialogBody,
-  DialogFooter,
 } from "@material-tailwind/react";
 import data from "../data/templesData";
 import { IoCloseSharp } from "react-icons/io5";
@@ -22,7 +20,7 @@ const Temple = ({ open, handleOpen, templeId }) => {
     >
       <DialogHeader>
         <div className="flex items-center justify-between w-full">
-          <p>{data[templeId].name}</p>
+          <p className="font-Telugu">{data[templeId].name}</p>
           <IoCloseSharp
             className="cursor-pointer"
             onClick={() => handleOpen(templeId)}
@@ -37,7 +35,7 @@ const Temple = ({ open, handleOpen, templeId }) => {
             <img src={data[templeId].image} alt="" />
           </div>
           {/* content */}
-          <div className="p-4 font-medium">{data[templeId].description}</div>
+          <div className="p-4 font-medium font-Telugu">{data[templeId].description}</div>
         </div>
       </DialogBody>
     </Dialog>
