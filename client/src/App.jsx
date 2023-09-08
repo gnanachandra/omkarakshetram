@@ -7,6 +7,8 @@ import RequireAuth from "./features/RequireAuth";
 import Register from "./components/Register";
 import AdminHomePage from "./components/admin/AdminHomePage";
 import Unauthorized from "./components/Unauthorized";
+import Events from "./components/admin/Events";
+import AdminLayout from "./components/admin/AdminLayout";
 
 const App = () => {
   return (
@@ -15,8 +17,9 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/admin" element={<RequireAuth admin={true} />}>
+        <Route path="/admin" element={<AdminLayout admin={true} />}>
           <Route index element={<AdminHomePage />} />
+          <Route path="events" element={<Events />} />
         </Route>
         <Route path="/user" element={<RequireAuth user={true} />}>
           <Route index element={<HomePage />} />

@@ -1,9 +1,10 @@
-import React from 'react'
-
+import { Sidebar } from "./Sidebar";
 const Header = () => {
   return (
-    <div>Header</div>
-  )
-}
+    <div className="p-4 md:px-8">
+      <Sidebar />
+    </div>
+  );
+};
 
-export default Header
+export default Header;
