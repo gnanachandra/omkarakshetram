@@ -2,18 +2,17 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const RequireAuth = () => {
-  const { token } = useSelector((store) => store["auth"]);
-  console.log(token)
+const RequireAuth = ( props ) => {
+  const { token, role } = useSelector((store) => store["auth"]);
+  console.log(props)
   if (!token) {
-    console.log(token)
     return <Navigate to={"/login"} replace />;
   }
-
   return (
     <div>
       <section>
-        <Outlet />
+        {props[role] ? <Outlet /> : <Navigate to={"/unauthorized"} replace />}
+        
       </section>
     </div>
   );

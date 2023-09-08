@@ -16,7 +16,7 @@ import Loading from "./Loading";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, isLoading } = useSelector((state) => state["auth"]);
+  const { token, isLoading,role } = useSelector((state) => state["auth"]);
   const form = useForm();
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
@@ -29,11 +29,11 @@ const Login = () => {
   const handleLogin = async (data) => {
     const response = await dispatch(userLogin(data));
     if (response.meta.requestStatus === "fulfilled") {
-      navigate("/home", { replace: true });
+      navigate(`/${response.payload.user.role}`, { replace: true });
     }
   };
   if (token) {
-    return <Navigate to="/home" replace/>
+    return <Navigate to={`/${role}`} replace/>
   }
   if (isLoading) {
     return <Loading />;
@@ -49,7 +49,7 @@ const Login = () => {
         >
           Login to your Account
         </CardHeader>
-        <CardBody className="p-4 w-screen max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md rounded-lg bg-primary text-white">
+        <CardBody className="p-4 w-screen max-w-xs sm:max-w-sm md:max-w-md lg:max-w-sm rounded-lg bg-primary text-white">
           <form
             onSubmit={handleSubmit(handleLogin)}
             className="flex flex-col gap-5"

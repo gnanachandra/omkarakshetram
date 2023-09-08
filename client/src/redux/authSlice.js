@@ -34,12 +34,14 @@ export const userRegisteration = createAsyncThunk(
 
 const token = localStorage.getItem("token");
 const user = JSON.parse(localStorage.getItem("user"));
+const role = localStorage.getItem("role")
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: user || null,
     token: token || null,
     isLoading: false,
+    role : role
   },
   reducers: {
     logoutUser: (state) => {
@@ -57,8 +59,10 @@ const authSlice = createSlice({
       state.isLoading = false;
       localStorage.setItem("user", JSON.stringify(payload.user));
       localStorage.setItem("token", payload.accessToken);
+      localStorage.setItem("role", payload.user.role);
       state.token = payload.accessToken;
       state.user = payload.user;
+      state.role = payload.user.role;
       toast.success(payload.message);
     });
     builder.addCase(userLogin.rejected, (state, { payload }) => {

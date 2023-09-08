@@ -28,21 +28,28 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
     },
+    role: {
+      type: String,
+      default: "user",
+    },
   },
   {
     timestamps: true,
   }
 );
 
-
 UserSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
 UserSchema.methods.generateAccessToken = async function () {
-  return await jwt.sign({ userId: this._id }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "1d",
-  });
+  return await jwt.sign(
+    { userId: this._id, role: this.role },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "1d",
+    }
+  );
 };
 
 export default mongoose.model("User", UserSchema);

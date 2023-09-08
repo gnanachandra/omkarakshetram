@@ -9,8 +9,7 @@ const Footer = () => {
           © {new Date().getFullYear()} ఓంకార క్షేత్రం . All Rights Reserved.
         </span>
         <div className="text-center tracking-wider md:tracking-normal">
-          Made with Devotion by{" "}
-          <span className="font-bold text-xl">Tangled Devs</span>
+          
         </div>
         <div className="flex flex-col items-center md:flex-row justify-between p-2 gap-4">
           <div>
