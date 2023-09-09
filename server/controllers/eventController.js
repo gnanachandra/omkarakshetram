@@ -4,9 +4,9 @@ import Event from "../models/Event.js";
 import mongoose from "mongoose";
 
 export const createEvent = asyncHandler(async (req, res) => {
-    const { name, description, date, time } = req.body;
-    if (!name || !description || !date || !time) {
-        throw new Error("Fill all details");
+    const { name, description, date } = req.body;
+    if (!name || !description || !date) {
+        throw new Error("Fill all details",StatusCodes.BAD_REQUEST);
     }
     const newEvent = await Event.create(req.body);
     const events = await Event.find({});

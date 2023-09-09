@@ -12,12 +12,17 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import eventsData from "../../data/fakeData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddEvent from "./AddEvent";
 import UpdateEvent from "./UpdateEvent";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteEvent, getEvents, setEvent } from "../../redux/eventSlice";
+import { formatDate, formatTime } from "../../utils/format";
+import Loading from "../Loading";
 
 const Events = () => {
+  const dispatch = useDispatch();
+  const { events ,isLoading} = useSelector((state) => state["event"]);
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const handleOpen = () => {
@@ -26,6 +31,14 @@ const Events = () => {
   const handleOpenEdit = () => {
     setOpenEdit(!openEdit);
   };
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
+
+  if(isLoading)
+  {
+    return <Loading/>
+  }
   return (
     <div className="p-4 md:px-8">
       {/* Heading and add event button */}
@@ -51,7 +64,7 @@ const Events = () => {
           </Typography>
           {/* Events in the form of cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {eventsData.map((event, index) => {
+            {events?.map((event, index) => {
               return (
                 <Card key={index} className="flex justify-between">
                   <CardHeader
@@ -64,8 +77,19 @@ const Events = () => {
                         {event.name}
                       </Typography>
                       <div className="flex items-center justify-between gap-2">
-                        <PencilSquareIcon className="h-6 w-6 cursor-pointer" onClick={handleOpenEdit} />
-                        <TrashIcon className="h-6 w-6 hover:text-red-500 cursor-pointer" />
+                        <PencilSquareIcon
+                          className="h-6 w-6 cursor-pointer"
+                          onClick={() => {
+                            dispatch(setEvent({ id: event._id }));
+                            handleOpenEdit();
+                          }}
+                        />
+                        <TrashIcon
+                          className="h-6 w-6 hover:text-red-500 cursor-pointer"
+                          onClick={() =>
+                            dispatch(deleteEvent({ id: event._id }))
+                          }
+                        />
                       </div>
                     </div>
                     <Typography as="p" className="font-medium mt-3">
@@ -75,11 +99,11 @@ const Events = () => {
                   <CardBody className="text-black pl-4 flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="h-6 w-6" />
-                      {event.date}
+                      {formatDate(event.date)}
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="h-6 w-6" />
-                      {event.time}
+                      {formatTime(event.date)}
                     </div>
                   </CardBody>
                 </Card>
