@@ -18,15 +18,14 @@ import UpdateEvent from "./UpdateEvent";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteEvent, getEvents, setEvent } from "../../redux/eventSlice";
 import {
-  convertTo12HourFormat,
-  formatDate,
   formatTime,
+  formatDate,
 } from "../../utils/format";
 import Loading from "../Loading";
 
 const Events = () => {
   const dispatch = useDispatch();
-  const { events, upcomingEvents, pastEvents, isLoading } = useSelector(
+  const { events, isLoading } = useSelector(
     (state) => state["event"]
   );
   const [open, setOpen] = useState(false);
@@ -108,7 +107,7 @@ const Events = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="h-6 w-6" />
-                      {event?.time && convertTo12HourFormat(event?.time)}
+                      {event?.time && formatTime(event?.time)}
                     </div>
                   </CardBody>
                 </Card>

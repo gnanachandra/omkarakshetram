@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { CalendarDaysIcon, ClockIcon } from "@heroicons/react/24/outline";
-import { convertTo12HourFormat } from "../utils/format";
+import { formatTime } from "../utils/format";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 const HomePageEvents = () => {
@@ -52,7 +52,7 @@ const HomePageEvents = () => {
                       </div>
                       <div className="flex items-center gap-3">
                         <ClockIcon className="h-6 w-6" />
-                        {convertTo12HourFormat(event.time)}
+                        {formatTime(event.time)}
                       </div>
                     </div>
                   </CardBody>

@@ -8,7 +8,7 @@ const store = configureStore({
   reducer: {
     auth : authReducer,
     event : eventReducer,
-    stream:streamReducer
+    stream:streamReducer,
     user: userReducer,
   },
 });

@@ -13,10 +13,10 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-import AddStream from "./AddStream"; 
-import UpdateStream from "./UpdateStream"; 
+import AddStream from "./AddStream";
+import UpdateStream from "./UpdateStream";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteStream, getStreams, setStream } from "../../redux/streamSlice"; 
+import { deleteStream, getStreams, setStream } from "../../redux/streamSlice";
 import { formatDate, formatTime } from "../../utils/format";
 import Loading from "../Loading";
 
@@ -87,7 +87,12 @@ const Streams = () => {
                     </div>
                   </div>
                   <Typography as="p" className="font-medium mt-3">
-                    {/* Add your stream-specific details here */}
+                    <p
+                      className="cursor-pointer hover:underline"
+                      onClick={() => (window.location.href = stream.link)}
+                    >
+                      {stream.link}
+                    </p>
                   </Typography>
                 </CardHeader>
                 <CardBody className="text-black pl-4 flex justify-between items-center">
@@ -97,8 +102,9 @@ const Streams = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <ClockIcon className="h-6 w-6" />
-                    {formatTime(stream.startTime)}
+                    {formatTime(stream.startTime)} to {formatTime(stream.endTime)}
                   </div>
+                  
                 </CardBody>
               </Card>
             );
