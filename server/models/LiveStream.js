@@ -6,36 +6,22 @@ const LiveStream = new mongoose.Schema(
       type: String,
       required: [true, "Live Stream name is required"],
     },
+    link: {
+      type: String,
+      required: [true, "Live Stream link is required"],
+    },
     date: {
       type: Date,
-      required: [true, "Live Stream Date is required"],
-      validate: {
-        validator: function (date) {
-          return date >= new Date();
-        },
-        message: "Past Dates are not allowed",
-      },
+      required: [true, "Live Stream link is required"],
     },
     startTime: {
-      type: Date,
+      type: String,
       required: [true, "Live stream start time is required"],
-      validate: {
-        validator: function (startTime) {
-          return startTime > new Date();
-        },
-        message: "Start time must be in the future",
-      },
     },
     endTime: {
-      type: Date,
+      type: String,
       required: [true, "Live stream End time is required"],
-      validate: {
-        validator: function (endTime) {
-          return this.startTime < endTime && endTime > new Date();
-        },
-        message: "End time must be after start time and in the future",
-      },
-    },
+    }
   },
   {
     timestamps: true,

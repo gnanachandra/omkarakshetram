@@ -31,7 +31,7 @@ export const createStream = createAsyncThunk(
 
 export const getStreams = createAsyncThunk(
   "/api/stream(get)",
-  async (_, { rejectWithValue }) => {
+  async (payload, { rejectWithValue }) => {
     try {
       const response = await axios.get("/api/stream", {
         headers: {
@@ -54,7 +54,7 @@ export const updateStream = createAsyncThunk(
     try {
       const response = await axios.patch(
         `/api/stream/${payload.id}`,
-        payload.data,
+        payload,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -73,9 +73,9 @@ export const updateStream = createAsyncThunk(
 
 export const deleteStream = createAsyncThunk(
   "/api/stream/:id(delete)",
-  async (id, { rejectWithValue }) => {
+  async (payload, { rejectWithValue }) => {
     try {
-      const response = await axios.delete(`/api/stream/${id}`, {
+      const response = await axios.delete(`/api/stream/${payload.id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -95,10 +95,7 @@ const streamSlice = createSlice({
   initialState,
   reducers: {
     setStream: (state, {payload}) => {
-      console.log(payload)
-      console.log(state.streams);
       state.stream = state.streams.find((e)=>e._id == payload.id)
-      console.log(state.stream)
     },
   },
   extraReducers: (builder) => {
@@ -146,6 +143,7 @@ const streamSlice = createSlice({
     builder.addCase(deleteStream.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.streams = payload.streams;
+      toast.success(payload.message);
     });
     builder.addCase(deleteStream.rejected, (state, { payload }) => {
       state.isLoading = false;

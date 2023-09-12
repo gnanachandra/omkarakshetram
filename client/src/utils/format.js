@@ -6,9 +6,16 @@ export const formatDate = (data) => {
   return `${day}-${month}-${year}`;
 };
 
-export const formatTime = (data) => {
-  const date = new Date(data);
-  const options = { hour: "numeric", minute: "numeric", hour12: true };
-  const timeString = date.toLocaleTimeString("en-US", options);
-  return timeString;
-};
+export const formatTime = (time) => {
+    let [hours, minutes] = time.split(":");
+    hours = parseInt(hours);
+    const period = hours >= 12 ? "PM" : "AM";
+    if (hours > 12) {
+      hours -= 12;
+    } else if (hours === 0) {
+      hours = 12;
+    }
+    hours = String(hours).padStart(2, "0");
+    minutes = String(minutes).padStart(2, "0");
+    return hours + ":" + minutes + " " + period;
+  }

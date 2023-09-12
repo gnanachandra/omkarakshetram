@@ -25,7 +25,7 @@ const AddStream = ({ open, handleOpen }) => {
   }
 
   const handleAddStream = async (data) => {
-    console.log(data);
+    console.log(`data :`,data);
     const response = await dispatch(createStream(data));
     console.log(response);
     if (response.meta.requestStatus === "fulfilled") {
@@ -43,7 +43,7 @@ const AddStream = ({ open, handleOpen }) => {
         handler={handleOpen}
         size="xs"
         dismiss={{ outsidePress: false }}
-        className="h-[26rem] overflow-auto"
+        className="h-[28rem] overflow-auto"
       >
         <DialogHeader>Add Stream Details</DialogHeader>
         <DialogBody divider>
@@ -59,14 +59,26 @@ const AddStream = ({ open, handleOpen }) => {
               {...register("name", {
                 required: {
                   value: true,
-                  message: "Stream name is required",
+                  message: "Event name is required",
                 },
               })}
             />
             <input
-              type="datetime-local"
+              type="text"
+              name="link"
+              placeholder="Event Link"
+              className="p-2 rounded-md border border-gray-700 w-full text-black"
+              {...register("link", {
+                required: {
+                  value: true,
+                  message: "Event link is required",
+                }
+              })}
+            />
+            <input
+              type="date"
               name="date"
-              placeholder="Event Date"
+              placeholder="Select event date"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("date", {
                 valueAsDate: true,
@@ -74,59 +86,36 @@ const AddStream = ({ open, handleOpen }) => {
                   value: true,
                   message: "Event date is required",
                 },
-                validate: {
-                  isvalidDate: (fieldValue) => {
-                    return fieldValue >= new Date() || "Enter a valid date";
-                  },
-                },
+                
               })}
             />
             <input
-              type="datetime-local"
+              type="time"
               name="startTime"
               placeholder="Select event start time"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("startTime", {
-                valueAsDate: true,
                 required: {
                   value: true,
                   message: "Event start time is required",
-                },
-                validate: {
-                  isValidTime: (fieldValue) => {
-                    const selectedTime = fieldValue.getTime();
-                    const currentTime = new Date().getTime();
-                    return selectedTime >= currentTime || "Enter a valid start time";
-                  },
                 }
               })}
             />
-
             <input
-              type="datetime-local"
+              type="time"
               name="endTime"
               placeholder="Select event end time"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("endTime", {
-                valueAsDate: true,
                 required: {
                   value: true,
                   message: "Event end time is required",
                 },
                 validate: {
-                  isEndTimeValid: (endTimeValue) => {
-                    const startTimeValue = new Date(
-                      document.querySelector('input[name="startTime"]').value
-                    );
-
-                    if (startTimeValue && endTimeValue) {
-                      return (
-                        endTimeValue > startTimeValue ||
-                        "End time must be greater than start time"
-                      );
+                  isEndTimeValid : (startTime,endTime) => {
+                    if (startTime && endTime) {
+                      return ( endTime >= startTime || "End time must be greater than start time");
                     }
-
-                    return true; // If either value is not available, skip validation.
                   },
                 },
               })}

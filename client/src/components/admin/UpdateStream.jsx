@@ -57,45 +57,43 @@ const UpdateStream = ({ open, handleOpen }) => {
               {...register("name", {
                 required: {
                   value: true,
-                  message: "Event name is required",
+                  message: "Stream name is required",
                 },
               })}
             />
             <input
-              type="datetime-local"
-              name="date"
-              defaultValue={
-                stream?.date
-                  ? new Date(stream.date).toISOString().slice(0, 16)
-                  : ""
-              }
+              type="text"
+              name="link"
+              defaultValue={stream?.link}
+              placeholder="Stream Link"
+              className="p-2 rounded-md border border-gray-700 w-full text-black"
+              {...register("link", {
+                required: {
+                  value: true,
+                  message: "Stream link is required",
+                },
+              })}
+            />
+            <input
+              type="date"
+              name="date"             
+              defaultValue={stream?.date?.split('T')[0]}
               placeholder="Stream Date"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("date", {
-                valueAsDate: true,
                 required: {
                   value: true,
                   message: "Stream date is required",
                 },
-                validate: {
-                  isvalidDate: (fieldValue) => {
-                    return fieldValue >= new Date() || "Enter a valid date";
-                  },
-                },
               })}
             />
             <input
-              type="datetime-local"
-              defaultValue={
-                stream?.startTime
-                  ? new Date(stream.startTime).toISOString().slice(0, 16)
-                  : ""
-              }
+              type="time"
               name="startTime"
+              defaultValue={stream?.startTime}
               placeholder="Start Time"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("startTime", {
-                valueAsDate: true,
                 required: {
                   value: true,
                   message: "Start time is required",
@@ -103,17 +101,12 @@ const UpdateStream = ({ open, handleOpen }) => {
               })}
             />
             <input
-              type="datetime-local"
-              defaultValue={
-                stream?.endTime
-                  ? new Date(stream.endTime).toISOString().slice(0, 16)
-                  : ""
-              }
-              name="endTime"
+              type="time"
+              name="endTime"      
+              defaultValue={stream?.endTime}
               placeholder="End Time"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("endTime", {
-                valueAsDate: true,
                 required: {
                   value: true,
                   message: "End time is required",
