@@ -15,19 +15,71 @@ const HomePageEvents = () => {
     getUsers();
   }, []);
   console.log(events);
+  const viewportWidth = window.innerWidth;
+  let perPage = 3;
+
+  if (viewportWidth <= 768) {
+    perPage = 1; // Mobile
+  } else if (viewportWidth <= 1024) {
+    perPage = 2; // Tablet
+  }
+
+  console.log(perPage)
   return (
     <div id="temples" className="p-4 md:px-8">
       <h2 className="font-Telugu text-center font-semibold text-2xl lg:text-3xl text-heading mb-4">
         Upcoming Events
       </h2>
-      <div>
+      <div className="hidden md:block">
         <Splide
           options={{
             speed: "2000",
             arrows: true,
             interval: 2000,
             autoplay: true,
-            perPage: 3,
+            perPage:  2,
+            perMove: 1,
+            gap: 20,
+          }}
+          aria-label="React Splide"
+          data-splide-interval="1000"
+        >
+          {events.map((event, index) => {
+            return (
+              <SplideSlide key={index}>
+                <Card className="cursor-pointer">
+                  <CardBody className="text-black flex flex-col gap-3">
+                    <Typography as="h2" className="text-lg font-bold">
+                      {event.name}
+                    </Typography>
+                    <Typography as="p" className="text-lg font-bold">
+                      {event.description}
+                    </Typography>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <CalendarDaysIcon className="h-6 w-6" />
+                        {event.date.split("T")[0]}
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <ClockIcon className="h-6 w-6" />
+                        {formatTime(event.time)}
+                      </div>
+                    </div>
+                  </CardBody>
+                </Card>
+              </SplideSlide>
+            );
+          })}
+        </Splide>
+      </div>
+      <div className="block md:hidden">
+        <Splide
+          options={{
+            speed: "2000",
+            arrows: true,
+            interval: 2000,
+            autoplay: true,
+            perPage:  1,
             perMove: 1,
             gap: 20,
           }}
