@@ -4,6 +4,8 @@ import { toast } from "react-hot-toast";
 
 const initialState = {
   events: [],
+  upcomingEvents : [],
+  pastEvents : [],
   event: {},
   isLoading: false,
 };
@@ -92,11 +94,11 @@ const eventSlice = createSlice({
   name: "event",
   initialState,
   reducers: {
-    setEvent: (state, {payload}) => {
-      console.log(payload)
+    setEvent: (state, { payload }) => {
+      console.log(payload);
       console.log(state.events);
-      state.event = state.events.find((e)=>e._id == payload.id)
-      console.log(state.event)
+      state.event = state.events.find((e) => e._id == payload.id);
+      console.log(state.event);
     },
   },
   extraReducers: (builder) => {
@@ -119,7 +121,7 @@ const eventSlice = createSlice({
     builder.addCase(updateEvent.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.events = payload.events;
-      toast.success(payload.message)
+      toast.success(payload.message);
     });
     builder.addCase(updateEvent.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -132,6 +134,12 @@ const eventSlice = createSlice({
     builder.addCase(getEvents.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.events = payload.events;
+      // state.upcomingEvents = state.events.filter(
+      //   (event) => event.date >= new Date() ? event : ""
+      // );
+      // state.pastEvents = state.events.filter((event) => event.date < new Date());
+      // console.log(state.upcomingEvents);
+      
     });
     builder.addCase(getEvents.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -144,6 +152,7 @@ const eventSlice = createSlice({
     builder.addCase(deleteEvent.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.events = payload.events;
+      toast.success(payload.message)
     });
     builder.addCase(deleteEvent.rejected, (state, { payload }) => {
       state.isLoading = false;

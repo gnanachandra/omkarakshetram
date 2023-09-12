@@ -18,7 +18,7 @@ const Temples = () => {
     setTempleId(id);
   };
   return (
-    <div id="temples" className="py-6 lg:py-12">
+    <div id="temples" className="py-6 lg:pt-12">
       <h2 className="font-Telugu text-center font-semibold text-2xl lg:text-3xl text-heading">
         మరిన్ని దేవాలయాలు
       </h2>

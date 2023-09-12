@@ -17,5 +17,5 @@ export const formatTime = (time) => {
     }
     hours = String(hours).padStart(2, "0");
     minutes = String(minutes).padStart(2, "0");
-    return hours + ":" + minutes + " " + period;
+    return `${hours}:${minutes} ${period}`;
   }

@@ -43,7 +43,7 @@ const AddEvent = ({ open, handleOpen }) => {
         handler={handleOpen}
         size="xs"
         dismiss={{ outsidePress: false }}
-        className="h-[26rem] overflow-auto"
+        className="h-[30rem] overflow-auto"
       >
         <DialogHeader>Add Event Details</DialogHeader>
         <DialogBody divider>
@@ -77,7 +77,7 @@ const AddEvent = ({ open, handleOpen }) => {
               })}
             />
             <input
-              type="datetime-local"
+              type="date"
               name="date"
               placeholder="Event Date"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
@@ -92,6 +92,21 @@ const AddEvent = ({ open, handleOpen }) => {
                     return fieldValue >= new Date() || "Enter a valid date";
                   },
                 },
+              })}
+            />
+
+            <input
+              type="time"
+              name="time"
+              placeholder="Event Time"
+              className="p-2 rounded-md border border-gray-700 w-full text-black"
+              {...register("time", {
+                
+                required: {
+                  value: true,
+                  message: "Event date is required",
+                },
+                
               })}
             />
 

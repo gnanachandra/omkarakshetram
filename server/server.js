@@ -6,6 +6,7 @@ import { ErrorMiddleWare } from "./middleware/error.js";
 import authRouter from "./routes/authRoute.js";
 import eventRouter from "./routes/eventRoute.js";
 import streamRouter from "./routes/streamRoute.js";
+import userRouter from "./routes/userRoute.js";
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/event", eventRouter);
 app.use("/api/stream", streamRouter);
+app.use("/api/user", userRouter);
 app.use(ErrorMiddleWare);
 
 const start = async () => {

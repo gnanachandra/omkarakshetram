@@ -4,7 +4,9 @@ import Event from "../models/Event.js";
 import mongoose from "mongoose";
 
 export const createEvent = asyncHandler(async (req, res) => {
-    const { name, description, date } = req.body;
+    const { name, description, date, time} = req.body;
+    // console.log(new Date(date).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' }));
+    console.log(req.body)
     if (!name || !description || !date) {
         throw new Error("Fill all details",StatusCodes.BAD_REQUEST);
     }
