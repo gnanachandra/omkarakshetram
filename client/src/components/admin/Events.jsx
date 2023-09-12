@@ -47,7 +47,7 @@ const Events = () => {
           Temple Events
         </Typography>
         <Button
-          className="flex items-center gap-2 hover:shadow-sm"
+          className="flex items-center gap-2 hover:shadow-sm bg-blue-500 text-white"
           size="sm"
           onClick={handleOpen}
         >

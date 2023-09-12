@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./redux/authSlice"
 import eventReducer from "./redux/eventSlice"
+import streamReducer from "./redux/streamSlice"
 const store = configureStore({
   reducer: {
     auth : authReducer,
-    event : eventReducer
+    event : eventReducer,
+    stream:streamReducer
   },
 });
 

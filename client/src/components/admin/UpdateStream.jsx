@@ -5,16 +5,17 @@ import {
   DialogBody,
   DialogHeader,
 } from "@material-tailwind/react";
-import Loading from "../Loading";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
-import { addEvent } from "../../redux/eventSlice";
-const AddEvent = ({ open, handleOpen }) => {
-  const { events, isLoading } = useSelector((state) => state["event"]);
-  const dispatch = useDispatch();
+import { toast } from "react-hot-toast";
+import { updateStream } from "./../../redux/streamSlice";
 
+const UpdateStream = ({ open, handleOpen }) => {
+  const { stream } = useSelector((state) => state["stream"]);
+
+  const dispatch = useDispatch();
   const form = useForm();
+
   const { register, formState, handleSubmit } = form;
   const { errors } = formState;
   const errorKeys = Object.keys(errors);
@@ -24,18 +25,14 @@ const AddEvent = ({ open, handleOpen }) => {
     toast.error(message);
   }
 
-  const handleAddEvent = async (data) => {
-    console.log(data);
-    const response = await dispatch(addEvent(data));
-    console.log(response);
+  const handleEditStream = async (data) => {
+    data["id"] = stream._id;
+    const response = await dispatch(updateStream(data));
     if (response.meta.requestStatus === "fulfilled") {
       handleOpen();
     }
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <div>
       <Dialog
@@ -45,16 +42,17 @@ const AddEvent = ({ open, handleOpen }) => {
         dismiss={{ outsidePress: false }}
         className="h-[26rem] overflow-auto"
       >
-        <DialogHeader>Add Event Details</DialogHeader>
+        <DialogHeader>Update Details</DialogHeader>
         <DialogBody divider>
           <form
             className="flex flex-col gap-4"
-            onSubmit={handleSubmit(handleAddEvent)}
+            onSubmit={handleSubmit(handleEditStream)}
           >
             <input
               type="text"
+              defaultValue={stream?.name}
               name="name"
-              placeholder="Event Name"
+              placeholder="Stream Name"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("name", {
                 required: {
@@ -63,29 +61,21 @@ const AddEvent = ({ open, handleOpen }) => {
                 },
               })}
             />
-            <textarea
-              rows={4}
-              type="text"
-              name="description"
-              placeholder="Description"
-              className="p-2 rounded-md border border-gray-700 w-full text-black"
-              {...register("description", {
-                required: {
-                  value: true,
-                  message: "Event description is required",
-                },
-              })}
-            />
             <input
               type="datetime-local"
               name="date"
-              placeholder="Event Date"
+              defaultValue={
+                stream?.date
+                  ? new Date(stream.date).toISOString().slice(0, 16)
+                  : ""
+              }
+              placeholder="Stream Date"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("date", {
                 valueAsDate: true,
                 required: {
                   value: true,
-                  message: "Event date is required",
+                  message: "Stream date is required",
                 },
                 validate: {
                   isvalidDate: (fieldValue) => {
@@ -94,7 +84,42 @@ const AddEvent = ({ open, handleOpen }) => {
                 },
               })}
             />
-
+            <input
+              type="datetime-local"
+              defaultValue={
+                stream?.startTime
+                  ? new Date(stream.startTime).toISOString().slice(0, 16)
+                  : ""
+              }
+              name="startTime"
+              placeholder="Start Time"
+              className="p-2 rounded-md border border-gray-700 w-full text-black"
+              {...register("startTime", {
+                valueAsDate: true,
+                required: {
+                  value: true,
+                  message: "Start time is required",
+                },
+              })}
+            />
+            <input
+              type="datetime-local"
+              defaultValue={
+                stream?.endTime
+                  ? new Date(stream.endTime).toISOString().slice(0, 16)
+                  : ""
+              }
+              name="endTime"
+              placeholder="End Time"
+              className="p-2 rounded-md border border-gray-700 w-full text-black"
+              {...register("endTime", {
+                valueAsDate: true,
+                required: {
+                  value: true,
+                  message: "End time is required",
+                },
+              })}
+            />
             <div className="flex items-center justify-between">
               <Button
                 onClick={handleOpen}
@@ -105,15 +130,14 @@ const AddEvent = ({ open, handleOpen }) => {
               </Button>
 
               <Button type="submit" color="green">
-                Add Event
+                Update Event
               </Button>
             </div>
           </form>
         </DialogBody>
-        <Toaster position="top-right" />
       </Dialog>
     </div>
   );
 };
 
-export default AddEvent;
+export default UpdateStream;

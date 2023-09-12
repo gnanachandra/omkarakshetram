@@ -9,9 +9,9 @@ import Loading from "../Loading";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { addEvent } from "../../redux/eventSlice";
-const AddEvent = ({ open, handleOpen }) => {
-  const { events, isLoading } = useSelector((state) => state["event"]);
+import { createStream } from "./../../redux/streamSlice";
+const AddStream = ({ open, handleOpen }) => {
+  const { streams, isLoading } = useSelector((state) => state["stream"]);
   const dispatch = useDispatch();
 
   const form = useForm();
@@ -24,9 +24,9 @@ const AddEvent = ({ open, handleOpen }) => {
     toast.error(message);
   }
 
-  const handleAddEvent = async (data) => {
+  const handleAddStream = async (data) => {
     console.log(data);
-    const response = await dispatch(addEvent(data));
+    const response = await dispatch(createStream(data));
     console.log(response);
     if (response.meta.requestStatus === "fulfilled") {
       handleOpen();
@@ -45,34 +45,21 @@ const AddEvent = ({ open, handleOpen }) => {
         dismiss={{ outsidePress: false }}
         className="h-[26rem] overflow-auto"
       >
-        <DialogHeader>Add Event Details</DialogHeader>
+        <DialogHeader>Add Stream Details</DialogHeader>
         <DialogBody divider>
           <form
             className="flex flex-col gap-4"
-            onSubmit={handleSubmit(handleAddEvent)}
+            onSubmit={handleSubmit(handleAddStream)}
           >
             <input
               type="text"
               name="name"
-              placeholder="Event Name"
+              placeholder="Stream Name"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("name", {
                 required: {
                   value: true,
-                  message: "Event name is required",
-                },
-              })}
-            />
-            <textarea
-              rows={4}
-              type="text"
-              name="description"
-              placeholder="Description"
-              className="p-2 rounded-md border border-gray-700 w-full text-black"
-              {...register("description", {
-                required: {
-                  value: true,
-                  message: "Event description is required",
+                  message: "Stream name is required",
                 },
               })}
             />
@@ -94,6 +81,56 @@ const AddEvent = ({ open, handleOpen }) => {
                 },
               })}
             />
+            <input
+              type="datetime-local"
+              name="startTime"
+              placeholder="Select event start time"
+              className="p-2 rounded-md border border-gray-700 w-full text-black"
+              {...register("startTime", {
+                valueAsDate: true,
+                required: {
+                  value: true,
+                  message: "Event start time is required",
+                },
+                validate: {
+                  isValidTime: (fieldValue) => {
+                    const selectedTime = fieldValue.getTime();
+                    const currentTime = new Date().getTime();
+                    return selectedTime >= currentTime || "Enter a valid start time";
+                  },
+                }
+              })}
+            />
+
+            <input
+              type="datetime-local"
+              name="endTime"
+              placeholder="Select event end time"
+              className="p-2 rounded-md border border-gray-700 w-full text-black"
+              {...register("endTime", {
+                valueAsDate: true,
+                required: {
+                  value: true,
+                  message: "Event end time is required",
+                },
+                validate: {
+                  isEndTimeValid: (endTimeValue) => {
+                    const startTimeValue = new Date(
+                      document.querySelector('input[name="startTime"]').value
+                    );
+
+                    if (startTimeValue && endTimeValue) {
+                      return (
+                        endTimeValue > startTimeValue ||
+                        "End time must be greater than start time"
+                      );
+                    }
+
+                    return true; // If either value is not available, skip validation.
+                  },
+                },
+              })}
+            />
 
             <div className="flex items-center justify-between">
               <Button
@@ -105,7 +142,7 @@ const AddEvent = ({ open, handleOpen }) => {
               </Button>
 
               <Button type="submit" color="green">
-                Add Event
+                Add Stream
               </Button>
             </div>
           </form>
@@ -116,4 +153,4 @@ const AddEvent = ({ open, handleOpen }) => {
   );
 };
 
-export default AddEvent;
+export default AddStream;
