@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Gallery from "../components/Gallery";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
+import HomePageEvents from "../components/HomePageEvents";
 import Temples from "../components/Temples";
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
         <Hero />
         <About/>
         <Temples/>
+        <HomePageEvents/>
         <Gallery/>
         <Contact/>
         <Footer/>
