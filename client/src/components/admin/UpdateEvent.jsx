@@ -12,10 +12,9 @@ import { updateEvent } from "../../redux/eventSlice";
 
 const UpdateEvent = ({ open, handleOpen }) => {
   const { event } = useSelector((state) => state["event"]);
-  
   const dispatch = useDispatch();
   const form = useForm();
-
+  console.log(event.date);
   const { register, formState, handleSubmit } = form;
   const { errors } = formState;
   const errorKeys = Object.keys(errors);
@@ -40,7 +39,7 @@ const UpdateEvent = ({ open, handleOpen }) => {
         handler={handleOpen}
         size="xs"
         dismiss={{ outsidePress: false }}
-        className="h-[26rem] overflow-auto"
+        className="h-[30rem] overflow-auto"
       >
         <DialogHeader>Update Details</DialogHeader>
         <DialogBody divider>
@@ -76,13 +75,9 @@ const UpdateEvent = ({ open, handleOpen }) => {
               })}
             />
             <input
-              type="datetime-local"
+              type="date"
               name="date"
-              defaultValue={
-                event?.date
-                  ? new Date(event.date).toISOString().slice(0, 16)
-                  : ""
-              }
+              defaultValue={event.date?.split("T")[0]}
               placeholder="Event Date"
               className="p-2 rounded-md border border-gray-700 w-full text-black"
               {...register("date", {
@@ -99,6 +94,20 @@ const UpdateEvent = ({ open, handleOpen }) => {
               })}
             />
 
+            <input
+              type="time"
+              name="time"
+              placeholder="Event Time"
+              defaultValue={event.time}
+              className="p-2 rounded-md border border-gray-700 w-full text-black"
+              {...register("time", {
+                required: {
+                  value: true,
+                  message: "Event date is required",
+                },
+              })}
+            />
+
             <div className="flex items-center justify-between">
               <Button
                 onClick={handleOpen}
@@ -109,7 +118,7 @@ const UpdateEvent = ({ open, handleOpen }) => {
               </Button>
 
               <Button type="submit" color="green">
-                Add Event
+                Update
               </Button>
             </div>
           </form>

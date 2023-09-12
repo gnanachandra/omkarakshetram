@@ -17,12 +17,18 @@ import AddEvent from "./AddEvent";
 import UpdateEvent from "./UpdateEvent";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteEvent, getEvents, setEvent } from "../../redux/eventSlice";
-import { formatDate, formatTime } from "../../utils/format";
+import {
+  convertTo12HourFormat,
+  formatDate,
+  formatTime,
+} from "../../utils/format";
 import Loading from "../Loading";
 
 const Events = () => {
   const dispatch = useDispatch();
-  const { events ,isLoading} = useSelector((state) => state["event"]);
+  const { events, upcomingEvents, pastEvents, isLoading } = useSelector(
+    (state) => state["event"]
+  );
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const handleOpen = () => {
@@ -35,9 +41,8 @@ const Events = () => {
     dispatch(getEvents());
   }, []);
 
-  if(isLoading)
-  {
-    return <Loading/>
+  if (isLoading) {
+    return <Loading />;
   }
   return (
     <div className="p-4 md:px-8">
@@ -63,7 +68,7 @@ const Events = () => {
             Upcoming Events
           </Typography>
           {/* Events in the form of cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5">
             {events?.map((event, index) => {
               return (
                 <Card key={index} className="flex justify-between">
@@ -103,7 +108,7 @@ const Events = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="h-6 w-6" />
-                      {formatTime(event.date)}
+                      {event?.time && convertTo12HourFormat(event?.time)}
                     </div>
                   </CardBody>
                 </Card>
@@ -112,7 +117,6 @@ const Events = () => {
           </div>
         </div>
         {/* past events div */}
-        <div></div>
       </div>
       <AddEvent open={open} handleOpen={handleOpen} />
       <UpdateEvent open={openEdit} handleOpen={handleOpenEdit} />

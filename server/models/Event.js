@@ -20,6 +20,10 @@ const EventSchema = new mongoose.Schema(
         message: "Past Dates are not allowed",
       },
     },
+    time : {
+      type : String,
+      required : [true, "Event time is required !"]
+    }
   },
   {
     timestamps: true,
