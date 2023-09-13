@@ -6,7 +6,7 @@ const YoutubeLive = () => {
   useEffect(() => {
     const getLiveStream = async () => {
       const response = await axios.get("/api/stream");
-      setLink(response.data.stream.link);
+      setLink(response.data.stream?.link);
     };
     getLiveStream();
   }, []);
