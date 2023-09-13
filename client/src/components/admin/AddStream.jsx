@@ -111,13 +111,7 @@ const AddStream = ({ open, handleOpen }) => {
                   value: true,
                   message: "Event end time is required",
                 },
-                validate: {
-                  isEndTimeValid : (startTime,endTime) => {
-                    if (startTime && endTime) {
-                      return ( endTime >= startTime || "End time must be greater than start time");
-                    }
-                  },
-                },
+                
               })}
             />
 

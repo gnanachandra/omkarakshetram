@@ -104,9 +104,8 @@ const Streams = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <ClockIcon className="h-6 w-6" />
-                    {
-                      stream?.startTime && <div>  {formatTime(stream.startTime)} {to} {formatTime(stream.endTime)}</div>
-                    }
+                    <div>  {formatTime(stream.startTime)} to {formatTime(stream.endTime)}</div>
+                    
                    
                   </div>
                   
