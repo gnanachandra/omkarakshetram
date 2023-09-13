@@ -7,6 +7,7 @@ export const formatDate = (data) => {
 };
 
 export const formatTime = (time) => {
+  if (time) {
     let [hours, minutes] = time.split(":");
     hours = parseInt(hours);
     const period = hours >= 12 ? "PM" : "AM";
@@ -19,3 +20,4 @@ export const formatTime = (time) => {
     minutes = String(minutes).padStart(2, "0");
     return `${hours}:${minutes} ${period}`;
   }
+};

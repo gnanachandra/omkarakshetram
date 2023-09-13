@@ -60,7 +60,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       localStorage.setItem("user", JSON.stringify(payload.user));
       localStorage.setItem("token", payload.accessToken);
-      localStorage.setItem("role", payload.user.role);
+      localStorage.setItem("role", payload.user.role || "user");
       state.token = payload.accessToken;
       state.user = payload.user;
       state.role = payload.user.role;
