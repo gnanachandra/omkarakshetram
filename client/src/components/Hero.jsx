@@ -8,10 +8,10 @@ const images = [
 ];
 
 const mobileImages = [
-  "/herosection/mobile/hero-1.webp",
-  "/herosection/mobile/hero-2.webp",
-  "/herosection/mobile/hero-3.webp",
-  "/herosection/mobile/hero-4.webp",
+  "/herosection/hero-3.jpg",
+  "/herosection/hero-2.jpg",
+  "/herosection/hero-1.jpg",
+  "/herosection/hero-4.jpg",
 ];
 
 const Hero = () => {
