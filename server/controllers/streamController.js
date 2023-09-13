@@ -18,7 +18,8 @@ export const createStream = asyncHandler(async (req, res) => {
 
 export const getStreams = asyncHandler(async (req, res) => {
     const streams = await LiveStream.find({}).sort({date :-1});
-    return res.status(StatusCodes.OK).json({ message: `Live Streams data sent`, streams });
+    const stream = streams[0];
+    return res.status(StatusCodes.OK).json({ message: `Live Streams data sent`, streams ,stream});
 });
 
 export const updateStream = asyncHandler(async (req, res) => {
@@ -28,7 +29,7 @@ export const updateStream = asyncHandler(async (req, res) => {
         return res.status(StatusCodes.NOT_FOUND).json({ message: `Live Stream not found!`});
     }
     const response = await LiveStream.findByIdAndUpdate(streamId, req.body, { runValidators: true });
-    const streams = await LiveStream.find({}).sort({date:-1});
+    const streams = await LiveStream.find({}).sort({date:-1,createdAt : -1});
     return res.status(StatusCodes.OK).json({ message: `Live Stream ${stream.name} updated`, streams });
 });
 

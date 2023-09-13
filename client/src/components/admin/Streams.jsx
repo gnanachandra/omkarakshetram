@@ -1,6 +1,7 @@
 import {
   CalendarIcon,
   ClockIcon,
+  LinkIcon,
   PencilSquareIcon,
   PlusIcon,
   TrashIcon,
@@ -88,10 +89,11 @@ const Streams = () => {
                   </div>
                   <Typography as="p" className="font-medium mt-3">
                     <p
-                      className="cursor-pointer hover:underline"
+                      className="cursor-pointer hover:underline flex items-center gap-2"
                       onClick={() => (window.location.href = stream.link)}
+
                     >
-                      {stream.link}
+                     <LinkIcon className="h-5 w-5"/> {stream.link}
                     </p>
                   </Typography>
                 </CardHeader>

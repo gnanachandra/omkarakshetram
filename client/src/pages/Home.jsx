@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import HomePageEvents from "../components/HomePageEvents";
 import Temples from "../components/Temples";
+import YoutubeLive from "../components/YoutubeLive";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Header />
       <div className="bg-background flex flex-col gap-14">
         <Hero />
+        <YoutubeLive/>
         <About/>
         <Temples/>
         <HomePageEvents/>
